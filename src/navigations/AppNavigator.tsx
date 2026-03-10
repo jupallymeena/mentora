@@ -2,7 +2,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import MentorStudents from "../screens/mentor/MentorStudents";
 import LoginScreen from "../screens/LoginScreen";
 import ParentDashboard from "../screens/parent/ParentDashboard";
 import StudentDashboard from "../screens/student/StudentDashboard";
@@ -53,7 +53,11 @@ export default function AppNavigator() {
             component={CreateStudent} 
             options={{ title: "Create Student" }}
           />
-
+          <Stack.Screen 
+  name="MentorStudents" 
+  component={MentorStudents} 
+  options={{ title: "Students" }}
+/>
           <Stack.Screen 
             name="LessonsList" 
             component={LessonsList} 

@@ -1,29 +1,33 @@
 
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import styles from "../../components/CardStyles";
-import { StudentContext } from "../../providers/StudentContext";
+import { users } from "../../data/mockData";
 
 export default function MentorDashboard({ navigation }: any) {
 
-  const { students } = useContext(StudentContext);
+  const mentors = users.filter((u) => u.role === "mentor");
 
   return (
     <View style={{ padding: 20 }}>
 
       <Text style={{ fontSize: 22, fontWeight: "bold", marginBottom: 10 }}>
-        My Students
+        Mentors
       </Text>
 
       <FlatList
-        data={students}
-        keyExtractor={(item: any) => item.id.toString()}
+        data={mentors}
+        keyExtractor={(item: any) => item.userId.toString()}
+
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("LessonsList")}
+            onPress={() =>
+              navigation.navigate("MentorStudents", { mentor: item })
+            }
           >
             <Text style={styles.name}>{item.name}</Text>
+            <Text style={{ color: "gray" }}>{item.email}</Text>
           </TouchableOpacity>
         )}
       />

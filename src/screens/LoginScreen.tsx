@@ -28,7 +28,7 @@ export default function LoginScreen({ navigation }: any) {
     }
 
     if (user.role === "mentor") {
-      navigation.navigate("MentorDashboard");
+      navigation.navigate("MentorDashboard", { user });
     }
   };
 
@@ -59,8 +59,8 @@ export default function LoginScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",   // vertical center
-    alignItems: "center",       // horizontal center
+    justifyContent: "center",  
+    alignItems: "center",      
     padding: 20,
     backgroundColor: "#f5f5f5"
   },

@@ -1,12 +1,38 @@
+
 export const users = [
   { userId: 1, name: "Parent One", role: "parent", email: "parent@gmail.com", password: "1234" },
-  { userId: 2, name: "Ramu", role: "student", email: "ramu@gmail.com", password: "1234" },
-  { userId: 3, name: "Mentor Mike", role: "mentor", email: "mentor@gmail.com", password: "1234" }
-
+  { userId: 2, name: "student", role: "student", email: "ramu@gmail.com", password: "1234", class: "5th" },
+  { userId: 3, name: "Mentor Mike", role: "mentor", email: "mentor@gmail.com", password: "1234" },
+  { userId: 4, name: "Gandhi", role: "mentor" },
+  { userId: 5, name: "Saraswathi", role: "mentor", },
+  { userId: 6, name: "kalam", role: "mentor", }
 ];
 
 export const students = [
-  { id: 1, name: "Ramu", dob: "2010-04-11", email: "ramu@gmail.com", password: "1234", class: "5th" },
+  {
+    id: 17124563,
+    name: "Srinu",
+    class: "6th",
+    email: "srinu@gmail.com",
+    dob: "2004-03-12",
+    mentorId: 4
+  },
+  {
+    id: 17124563,
+    name: "jyothi",
+    class: "5th",
+    email: "jyothi@gmail.com",
+    dob: "2006-05-12",
+    mentorId: 5
+  },
+  {
+    id: 17124563,
+    name: "Venkat",
+    class: "8th",
+    email: "venkat@gmail.com",
+    dob: "2002-11-12",
+    mentorId: 5
+  }
 ];
 
 export const lessons = [

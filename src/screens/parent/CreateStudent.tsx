@@ -1,9 +1,10 @@
 
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import AppButton from "../../components/AppButton";
 import styles from "./CreateStudentStyles";
 import { StudentContext } from "../../providers/StudentContext";
+import { users } from "../../data/mockData";
 
 export default function CreateStudent({ navigation }: any) {
 
@@ -15,6 +16,11 @@ export default function CreateStudent({ navigation }: any) {
   const [password, setPassword] = useState("");
   const [dob, setDob] = useState("");
 
+  const [mentorId, setMentorId] = useState<number | null>(null);
+  const [showMentors, setShowMentors] = useState(false);
+
+  const mentors = users.filter(u => u.role === "mentor");
+
   const handleCreate = () => {
 
     const newStudent = {
@@ -23,7 +29,8 @@ export default function CreateStudent({ navigation }: any) {
       class: studentClass,
       email,
       password,
-      dob
+      dob,
+      mentorId
     };
 
     setStudents([...students, newStudent]);
@@ -31,22 +38,24 @@ export default function CreateStudent({ navigation }: any) {
     navigation.goBack();
   };
 
+  const selectedMentor = mentors.find(m => m.userId === mentorId);
+
   return (
     <View style={styles.container}>
 
       <Text style={styles.title}>Create Student</Text>
 
-      <Text style={styles.label}>Name / Surname</Text>
+      <Text style={styles.label}>Name</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter student name"
+        placeholder="Enter name"
         onChangeText={setName}
       />
 
       <Text style={styles.label}>Class</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter class (e.g., 5th)"
+        placeholder="Enter class"
         onChangeText={setStudentClass}
       />
 
@@ -54,7 +63,6 @@ export default function CreateStudent({ navigation }: any) {
       <TextInput
         style={styles.input}
         placeholder="Enter email"
-        keyboardType="email-address"
         onChangeText={setEmail}
       />
 
@@ -72,6 +80,36 @@ export default function CreateStudent({ navigation }: any) {
         placeholder="YYYY-MM-DD"
         onChangeText={setDob}
       />
+
+      {/* Mentor Dropdown */}
+
+      <Text style={styles.label}>Assign Mentor</Text>
+
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setShowMentors(!showMentors)}
+      >
+        <Text>
+          {selectedMentor ? selectedMentor.name : "Select Mentor"}
+        </Text>
+      </TouchableOpacity>
+
+      {showMentors && mentors.map((m) => (
+        <TouchableOpacity
+          key={m.userId}
+          style={{
+            padding: 10,
+            borderBottomWidth: 1,
+            borderColor: "#ddd"
+          }}
+          onPress={() => {
+            setMentorId(m.userId);
+            setShowMentors(false);
+          }}
+        >
+          <Text>{m.name}</Text>
+        </TouchableOpacity>
+      ))}
 
       <AppButton
         title="Create Student"
