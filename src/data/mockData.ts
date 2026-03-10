@@ -10,7 +10,7 @@ export const users = [
 
 export const students = [
   {
-    id: 17124563,
+    id: 1,
     name: "Srinu",
     class: "6th",
     email: "srinu@gmail.com",
@@ -18,7 +18,7 @@ export const students = [
     mentorId: 4
   },
   {
-    id: 17124563,
+    id: 2,
     name: "jyothi",
     class: "5th",
     email: "jyothi@gmail.com",
@@ -26,7 +26,7 @@ export const students = [
     mentorId: 5
   },
   {
-    id: 17124563,
+    id: 3,
     name: "Venkat",
     class: "8th",
     email: "venkat@gmail.com",

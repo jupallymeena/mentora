@@ -5,6 +5,8 @@ import AppButton from "../../components/AppButton";
 import styles from "./CreateStudentStyles";
 import { StudentContext } from "../../providers/StudentContext";
 import { users } from "../../data/mockData";
+import DatePicker from "react-native-date-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function CreateStudent({ navigation }: any) {
 
@@ -14,8 +16,9 @@ export default function CreateStudent({ navigation }: any) {
   const [studentClass, setStudentClass] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [dob, setDob] = useState("");
-
+  // const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(new Date());
+const [showPicker, setShowPicker] = useState(false);
   const [mentorId, setMentorId] = useState<number | null>(null);
   const [showMentors, setShowMentors] = useState(false);
 
@@ -29,7 +32,7 @@ export default function CreateStudent({ navigation }: any) {
       class: studentClass,
       email,
       password,
-      dob,
+     dob: dob.toISOString().split("T")[0],
       mentorId
     };
 
@@ -74,12 +77,28 @@ export default function CreateStudent({ navigation }: any) {
         onChangeText={setPassword}
       />
 
-      <Text style={styles.label}>Date of Birth</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="YYYY-MM-DD"
-        onChangeText={setDob}
-      />
+<Text style={styles.label}>Date of Birth</Text>
+
+<TouchableOpacity
+  style={styles.input}
+  onPress={() => setShowPicker(true)}
+>
+  <Text>{dob.toDateString()}</Text>
+</TouchableOpacity>
+
+{showPicker && (
+  <DateTimePicker
+    value={dob}
+    mode="date"
+    display="default"
+    onChange={(event, selectedDate) => {
+      setShowPicker(false);
+      if (selectedDate) {
+        setDob(selectedDate);
+      }
+    }}
+  />
+)}
 
       {/* Mentor Dropdown */}
 
